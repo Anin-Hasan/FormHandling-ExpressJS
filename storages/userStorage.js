@@ -1,0 +1,37 @@
+class UsersStorage {
+  constructor() {
+    this.storage = {};
+    this.id = 0;
+  }
+
+  addUser({ firstName, lastName, email, age }) {
+    const id = this.id;
+    this.storage[id] = { id, firstName, lastName, email, age };
+    this.id++;
+  }
+  searchUser({ name, email }) {
+    console.log("Search criteria - Name:", name, "Email:", email);
+    var result = Object.values(this.storage).filter(
+      (obj) => obj.firstName === name || obj.email === email
+    );
+    return result;
+  }
+
+  getUsers() {
+    return Object.values(this.storage);
+  }
+
+  getUser(id) {
+    return this.storage[id];
+  }
+
+  updateUser(id, { firstName, lastName, email, age }) {
+    this.storage[id] = { id, firstName, lastName, email, age };
+  }
+
+  deleteUser(id) {
+    delete this.storage[id];
+  }
+}
+
+module.exports = new UsersStorage();
